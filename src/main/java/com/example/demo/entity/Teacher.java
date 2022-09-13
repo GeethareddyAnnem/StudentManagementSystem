@@ -27,9 +27,13 @@ public class Teacher {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+
+
 	@NotBlank(message = "Name should not be empty")
 	@Length(min = 3,max=40,message = "length should be 3 to 40 chars only")
 	private String name;
+
+
 	@NotBlank(message = "gender is mandatory")
 	private String gender;
 	
@@ -38,6 +42,8 @@ public class Teacher {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonBackReference
 	private Course course;
+
+    
     public Teacher(Integer id,
             @NotBlank(message = "Name should not be empty") @Length(min = 3, max = 40, message = "length should be 3 to 40 chars only") String name,
             @NotBlank(message = "gender is mandatory") String gender,

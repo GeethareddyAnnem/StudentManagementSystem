@@ -59,8 +59,8 @@ public Student getStudentById(@PathVariable("id")int id) throws RecordNotFoundEx
 public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws RecordNotFoundException{
    studService.deleteStudent(id);
    Map<String,String> map = new HashMap();
-   map.put("Response", "Student of "+id+" deleted successfully..");
-   return ResponseEntity.status(HttpStatus.NO_CONTENT).body(map);
+   map.put("Response", "Student deleted successfully..");
+   return new ResponseEntity(map, HttpStatus.NO_CONTENT);
 
 
 }
