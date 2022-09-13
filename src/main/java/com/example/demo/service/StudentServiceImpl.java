@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controller.RecordNotFoundException;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
 
@@ -35,8 +37,98 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student createStudent(Student s) {
-        // TODO Auto-generated method stub
+      
        return sr.save(s);
+    }
+
+
+
+
+
+
+    @Override
+    public List<Student> getallList() {
+        
+        return sr.findAll();
+    }
+
+
+
+
+
+
+    @Override
+    public Student getStudentbyId(int id) throws RecordNotFoundException {
+        Optional<Student> sOpt= sr.findById(id);
+        
+
+       
+        if(!sOpt.isPresent()){
+           throw new RecordNotFoundException("Student not found db.");
+        }
+        else{
+            return sOpt.get();
+        }
+
+        
+        
+    }
+
+
+
+
+
+
+    @Override
+    public void deleteStudent(int id) throws RecordNotFoundException {
+
+        Optional<Student> sOpt= sr.findById(id);
+        
+
+       
+        if(!sOpt.isPresent()){
+           throw new RecordNotFoundException("given student id not found in db");
+        }
+        else{
+            sr.deleteById(id);
+        }
+       
+        
+    }
+
+
+
+
+
+
+    @Override
+    public Student updateStudent(int id, Student s) {
+       
+       
+    Optional<Student> op = sr.findById(id);
+    if (!op.isPresent()) {
+        throw new RecordNotFoundException("student is not found in db");
+
+    } else if (op.get().getId() == id) {
+        if (s.getName() != null && !("".equals(s.getName() ))) {
+            op.get().setName(s.getName() );
+        }
+        if (s.getGender() != null && !("".equals(s.getGender()))) {
+            op.get().setGender(s.getGender());
+        }
+
+        if (s.getStandard() != null && !("".equals(s.getStandard()))) {
+            op.get().setStandard(s.getStandard());
+        }
+
+        sr.save(op.get());
+        return op.get();
+
+    }
+   
+
+    return null;
+
     }
 
 }
