@@ -92,7 +92,7 @@ map.put("Studentssss", lst2);
 
 }
 
-@DeleteMapping("/teacher/{id}")
+@DeleteMapping("/admin/teacher/{id}")
 public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws RecordNotFoundException{
    tr.deleteById(id);
    Map<String,String> map = new HashMap();
@@ -104,7 +104,7 @@ public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws Reco
 
 
 }
-@PostMapping("/teacher")
+@PostMapping("/admin/teacher")
 public ResponseEntity<Object>createTeacher(@Valid @RequestBody Teacher t){
      Teacher obj = tr.save(t);
      
@@ -114,4 +114,11 @@ public ResponseEntity<Object>createTeacher(@Valid @RequestBody Teacher t){
 }
 
 
+
+
+@GetMapping("/admin/teacher")
+public List<Teacher> showAllTeacher(){
+
+    return tr.findAll();
+}
 }

@@ -31,7 +31,7 @@ public class StudentController {
 	public StudentController(StudentService studService) {
 		this.studService = studService;
 	}
-	@PostMapping("/student")
+	@PostMapping("/admin/student")
 	public ResponseEntity<Object>createStudent(@Valid @RequestBody Student s){
 	     Student studentobj = studService.createStudent(s);
 	     
@@ -41,7 +41,7 @@ public class StudentController {
 	}
 
 
-	@GetMapping(value="/student")
+	@GetMapping("/admin/student")
 	public List<Student> getAllStudent(){
 		return studService.getallList();
 	}
@@ -55,7 +55,7 @@ public class StudentController {
 public Student getStudentById(@PathVariable("id")int id) throws RecordNotFoundException {
     return studService.getStudentbyId(id);
 }
-@DeleteMapping("/student/{id}")
+@DeleteMapping("/admin/student/{id}")
 public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws RecordNotFoundException{
    studService.deleteStudent(id);
    Map<String,String> map = new HashMap();
@@ -65,7 +65,7 @@ public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws Reco
 
 }
 
-@PutMapping("/student/{id}")
+@PutMapping("/admin/student/{id}")
 public Student updateStudent(@PathVariable("id") int id, @RequestBody Student s){
     
 	return studService.updateStudent(id,s);

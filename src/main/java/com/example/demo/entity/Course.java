@@ -41,7 +41,7 @@ public class Course {
     private Student student;
 
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "course")
+    @OneToOne(cascade = CascadeType.MERGE,mappedBy = "course")
     @JsonManagedReference
     private Teacher teacher;
 

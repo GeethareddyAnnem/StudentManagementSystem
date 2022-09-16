@@ -39,7 +39,7 @@ public class Teacher {
 	
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JsonBackReference
 	private Course course;
 
