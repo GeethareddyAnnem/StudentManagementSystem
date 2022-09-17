@@ -8,10 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-
-import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -29,9 +28,8 @@ public class Student {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-   @NotBlank(message = "Name should not be empty")
-	@Length(min = 3,max=40,message = "length should be 3 to 40 chars only")
-	private String name;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
 	@NotBlank(message = "gender is mandatory")
 	private String gender;
 	@NotBlank(message = "standard is mandatory")
@@ -42,11 +40,11 @@ public class Student {
 	private List<Course> course;
 
 public Student(Integer id,
-		@NotBlank(message = "Name should not be empty") @Length(min = 3, max = 40, message = "length should be 3 to 40 chars only") String name,
+		@Valid User user,
 		@NotBlank(message = "gender is mandatory") String gender,
 		@NotBlank(message = "standard is mandatory") String standard, @Valid List<Course> course) {
 	this.id = id;
-	this.name = name;
+	this.user = user;
 	this.gender = gender;
 	this.standard = standard;
 	this.course = course;
