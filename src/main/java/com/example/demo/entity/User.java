@@ -1,10 +1,16 @@
 package com.example.demo.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
@@ -36,9 +42,10 @@ public class User{
 
     @JsonProperty(access = Access.WRITE_ONLY)
     //@Column(columnDefinition = "varchar(255) default 'ROLE_STUDENT'")
-    private String role="ROLE_STUDENT";
-
-    
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    private Set<Role> roles;
+   
+    private boolean enabled;
 
 
  

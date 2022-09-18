@@ -28,14 +28,14 @@ public class Student {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	private User user;
 	@NotBlank(message = "gender is mandatory")
 	private String gender;
 	@NotBlank(message = "standard is mandatory")
 	private String standard;
 
-@OneToMany(cascade = CascadeType.ALL,mappedBy = "student")
+@OneToMany(cascade = CascadeType.MERGE,mappedBy = "student")
  @JsonManagedReference
 	private List<Course> course;
 

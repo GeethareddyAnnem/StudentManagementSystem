@@ -25,7 +25,7 @@ public class Teacher {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
 	private User user;
 
 

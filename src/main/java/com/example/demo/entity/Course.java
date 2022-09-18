@@ -37,7 +37,7 @@ public class Course {
  
     
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Student student;
 
 
