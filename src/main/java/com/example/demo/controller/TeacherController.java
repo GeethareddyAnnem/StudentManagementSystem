@@ -78,7 +78,7 @@ public Map<String,Object> getTeacherById(@PathVariable("id")int id) throws Recor
     
     List<Student> lst = sr.findByCourse(course);
     List<TempStudent> lst2 = new ArrayList<>() ;
-    lst.forEach(s-> lst2.add(new TempStudent(s.getId(),s.getName(),s.getGender(),s.getStandard())) );
+    lst.forEach(s-> lst2.add(new TempStudent(s.getId(),s.getUser().getUsername(),s.getGender(),s.getStandard())) );
     
 
 map.put("Studentssss", lst2);

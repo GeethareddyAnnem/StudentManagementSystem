@@ -110,9 +110,7 @@ public class StudentServiceImpl implements StudentService {
         throw new RecordNotFoundException("student is not found in db");
 
     } else if (op.get().getId() == id) {
-        if (s.getName() != null && !("".equals(s.getName() ))) {
-            op.get().setName(s.getName() );
-        }
+     
         if (s.getGender() != null && !("".equals(s.getGender()))) {
             op.get().setGender(s.getGender());
         }
