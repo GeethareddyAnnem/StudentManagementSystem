@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,11 +19,13 @@ public class CustomUserDetailsService implements UserDetailsService {
    private UserRepository ur;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = ur.findByUsername(username).get();
-		if(user == null) {
+    	
+        Optional<User> user = ur.findByUsername(username);
+		if(!user.isPresent()) {
 			throw new RecordNotFoundException("User NOt Fount ."+username);
 		}
-		return new UserDetailsImpl(user);
+		User user1 = user.get();
+		return new UserDetailsImpl(user1);
       
     }
     

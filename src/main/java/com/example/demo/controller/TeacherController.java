@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,8 @@ public class TeacherController {
     private CourseRepository cr;
     @Autowired
     private StudentRepository sr;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
     
     @Data
@@ -93,7 +96,7 @@ map.put("Studentssss", lst2);
 }
 
 @DeleteMapping("/admin/teacher/{id}")
-public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws RecordNotFoundException{
+public ResponseEntity <Map> deleteStudent(@PathVariable("id") int id) throws RecordNotFoundException{
    tr.deleteById(id);
    Map<String,String> map = new HashMap();
    map.put("Response", "Teacher deleted successfully..");
@@ -106,6 +109,7 @@ public ResponseEntity<Map> deleteStudent(@PathVariable("id") int id) throws Reco
 }
 @PostMapping("/admin/teacher")
 public ResponseEntity<Object>createTeacher(@Valid @RequestBody Teacher t){
+	t.getUser().setPassword(passwordEncoder.encode(t.getUser().getPassword()));
      Teacher obj = tr.save(t);
      
     URI loc = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

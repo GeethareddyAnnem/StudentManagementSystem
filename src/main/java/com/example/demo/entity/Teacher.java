@@ -25,7 +25,7 @@ public class Teacher {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
 	private User user;
 
 
@@ -34,7 +34,7 @@ public class Teacher {
 	
 
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = {CascadeType.ALL})
     @JsonBackReference
 	private Course course;
 

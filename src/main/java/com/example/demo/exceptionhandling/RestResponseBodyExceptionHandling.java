@@ -24,7 +24,7 @@ public class RestResponseBodyExceptionHandling extends ResponseEntityExceptionHa
       List<String> details = new ArrayList<>();
       details.add(ex.getLocalizedMessage());
       ErrorResponse error = new ErrorResponse("Record Not Found", details);
-      return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+      return new ResponseEntity<Object>(error, HttpStatus.NOT_FOUND);
     }
     
 

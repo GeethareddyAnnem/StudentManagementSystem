@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.ManyToAny;
+
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
