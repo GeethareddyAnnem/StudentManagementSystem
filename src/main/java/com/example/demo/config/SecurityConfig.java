@@ -57,9 +57,18 @@ public class SecurityConfig {
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity,JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,JwtRequestFilter jwtRequestFilter) throws Exception {
 		// We don't need CSRF for this example
+		
+		 final String[] AUTH_WHITELIST = {
+		        "/swagger-resources/**",
+		        "/swagger-ui/**",
+		        "/v3/api-docs",
+		        "/authenticate",
+		        "/webjars/**"
+		};
 		httpSecurity.csrf().disable()
 				.authorizeRequests()
-                .antMatchers("/authenticate").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
+			
            
               
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
